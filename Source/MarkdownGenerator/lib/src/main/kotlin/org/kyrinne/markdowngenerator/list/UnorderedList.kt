@@ -1,12 +1,12 @@
 package org.kyrinne.markdowngenerator.list
 
-import net.steppschuh.markdowngenerator.MarkdownElement
-import net.steppschuh.markdowngenerator.MarkdownSerializationException
-import net.steppschuh.markdowngenerator.util.StringUtil
+import org.kyrinne.markdowngenerator.MarkdownElement
+import org.kyrinne.markdowngenerator.MarkdownSerializationException
+import org.kyrinne.markdowngenerator.util.StringUtil
 
 open class UnorderedList<T : Any?> : MarkdownElement {
     protected var items: MutableList<T>
-    protected var indentationLevel: Int = 0
+    private var indentationLevel: Int = 0
 
     constructor() {
         this.items = ArrayList()
@@ -28,14 +28,20 @@ open class UnorderedList<T : Any?> : MarkdownElement {
                 sb.append("  ")
             }
 
-            if (item is UnorderedListItem) {
-                sb.append(item)
-            } else if (item is UnorderedList<*>) {
-                val unorderedList = item as UnorderedList<*>
-                unorderedList.setIndentationLevel(indentationLevel + 1)
-                sb.append(unorderedList)
-            } else {
-                sb.append(UnorderedListItem(item))
+            when (item) {
+                is UnorderedListItem -> {
+                    sb.append(item)
+                }
+
+                is UnorderedList<*> -> {
+                    val unorderedList = item as UnorderedList<*>
+                    unorderedList.setIndentationLevel(indentationLevel + 1)
+                    sb.append(unorderedList)
+                }
+
+                else -> {
+                    sb.append(UnorderedListItem(item))
+                }
             }
 
             if (itemIndex < items.size - 1) {
@@ -58,7 +64,7 @@ open class UnorderedList<T : Any?> : MarkdownElement {
         return indentationLevel
     }
 
-    fun setIndentationLevel(indentationLevel: Int) {
+    private fun setIndentationLevel(indentationLevel: Int) {
         this.indentationLevel = indentationLevel
         invalidateSerialized()
     }

@@ -1,10 +1,14 @@
 package org.kyrinne.markdowngenerator.text
 
-import net.steppschuh.markdowngenerator.MarkdownCascadable
-import net.steppschuh.markdowngenerator.MarkdownElement
-import net.steppschuh.markdowngenerator.MarkdownSerializationException
+import org.kyrinne.markdowngenerator.MarkdownCascadable
+import org.kyrinne.markdowngenerator.MarkdownElement
+import org.kyrinne.markdowngenerator.MarkdownSerializationException
 
-open class Text(protected var value: Any?) : MarkdownElement(), MarkdownCascadable {
+open class Text(
+    protected var value: Any?,
+    override val predecessor: String = "",
+    override val successor: String = "",
+) : MarkdownElement(), MarkdownCascadable {
     @Throws(MarkdownSerializationException::class)
     override fun serialize(): String {
         if (value == null) {
@@ -13,11 +17,7 @@ open class Text(protected var value: Any?) : MarkdownElement(), MarkdownCascadab
         return predecessor + value.toString() + successor
     }
 
-    override fun getPredecessor(): String {
-        return ""
-    }
-
-    override fun getSuccessor(): String {
+    open fun getSuccessor(): String {
         return predecessor
     }
 

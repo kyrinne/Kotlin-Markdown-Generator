@@ -1,30 +1,30 @@
 package org.kyrinne.markdowngenerator
 
-import net.steppschuh.markdowngenerator.image.Image
-import net.steppschuh.markdowngenerator.link.Link
-import net.steppschuh.markdowngenerator.list.ListBuilder
-import net.steppschuh.markdowngenerator.list.TaskList
-import net.steppschuh.markdowngenerator.list.TaskListItem
-import net.steppschuh.markdowngenerator.list.UnorderedList
-import net.steppschuh.markdowngenerator.progress.ProgressBar
-import net.steppschuh.markdowngenerator.rule.HorizontalRule
-import net.steppschuh.markdowngenerator.text.Text
-import net.steppschuh.markdowngenerator.text.code.Code
-import net.steppschuh.markdowngenerator.text.code.CodeBlock
-import net.steppschuh.markdowngenerator.text.code.CodeBlockBuilder
-import net.steppschuh.markdowngenerator.text.emphasis.BoldText
-import net.steppschuh.markdowngenerator.text.emphasis.ItalicText
-import net.steppschuh.markdowngenerator.text.emphasis.StrikeThroughText
-import net.steppschuh.markdowngenerator.text.heading.Heading
-import net.steppschuh.markdowngenerator.text.quote.Quote
-import net.steppschuh.markdowngenerator.text.quote.QuoteBuilder
+import org.kyrinne.markdowngenerator.image.Image
+import org.kyrinne.markdowngenerator.link.Link
+import org.kyrinne.markdowngenerator.list.ListBuilder
+import org.kyrinne.markdowngenerator.list.TaskList
+import org.kyrinne.markdowngenerator.list.TaskListItem
+import org.kyrinne.markdowngenerator.list.UnorderedList
+import org.kyrinne.markdowngenerator.progress.ProgressBar
+import org.kyrinne.markdowngenerator.rule.HorizontalRule
+import org.kyrinne.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.text.code.Code
+import org.kyrinne.markdowngenerator.text.code.CodeBlock
+import org.kyrinne.markdowngenerator.text.code.CodeBlockBuilder
+import org.kyrinne.markdowngenerator.text.emphasis.BoldText
+import org.kyrinne.markdowngenerator.text.emphasis.ItalicText
+import org.kyrinne.markdowngenerator.text.emphasis.StrikeThroughText
+import org.kyrinne.markdowngenerator.text.heading.Heading
+import org.kyrinne.markdowngenerator.text.quote.Quote
+import org.kyrinne.markdowngenerator.text.quote.QuoteBuilder
 import java.util.*
 
 /**
  * Base class that every markdown builder extends. Basically capable of
  * appending stuff to a root [MarkdownElement].
  */
-abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>() : MarkdownSerializable {
+abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>() : MarkdownSerializable {
     /**
      * The root element that content will be appended too.
      */
@@ -46,15 +46,9 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>
     }
 
     protected abstract val builder: T
-        /**
-         * Used for method chaining.
-         *
-         * @return the builder instance
-         */
-        abstract get
 
     /**
-     * Creates the root element. Typically without any content.
+     * Creates the root element. Typically, without any content.
      *
      * @return the root markdown element
      */
@@ -85,7 +79,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>
             return this
         }
         parentBuilder!!.append(this)
-        return parentBuilder
+        return parentBuilder as MarkdownBuilder<*, *>
     }
 
     // Emphasis
@@ -345,7 +339,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>
      */
     fun unorderedList(vararg items: Any?): T {
         newLinesIfRequired(1)
-        append(UnorderedList(Arrays.asList(*items)))
+        append(UnorderedList(mutableListOf(*items)))
         return newParagraph()
     }
 
@@ -458,11 +452,11 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>
         for (i in 0 until count) {
             separators += System.lineSeparator()
         }
-        return markdownElement!!.getSerialized("").endsWith(separators!!)
+        return markdownElement.getSerialized("").endsWith(separators!!)
     }
 
     override fun toString(): String {
-        return build()!!.getSerialized(this.javaClass.simpleName)
+        return build().getSerialized(this.javaClass.simpleName)
     }
 
     @Throws(MarkdownSerializationException::class)
@@ -474,7 +468,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement?>
      * Returns the root [MarkdownBuilder.markdownElement]
      * @return [MarkdownBuilder.markdownElement]
      */
-    fun build(): S {
+    private fun build(): S {
         return markdownElement
     }
 }

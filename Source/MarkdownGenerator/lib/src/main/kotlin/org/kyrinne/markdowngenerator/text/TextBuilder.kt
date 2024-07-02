@@ -1,24 +1,21 @@
 package org.kyrinne.markdowngenerator.text
 
-import net.steppschuh.markdowngenerator.MarkdownBuilder
+import org.kyrinne.markdowngenerator.MarkdownBuilder
 
 /**
  * Created by steppschuh on 23/12/2016.
  */
-class TextBuilder : MarkdownBuilder<org.kyrinne.markdowngenerator.text.TextBuilder?, org.kyrinne.markdowngenerator.text.Text?> {
-    constructor()
+class TextBuilder(override val builder: TextBuilder?) : MarkdownBuilder<TextBuilder?, Text>() {
 
-    constructor(parentBuilder: MarkdownBuilder<*, *>?) : super(parentBuilder)
-
-    override fun getBuilder(): org.kyrinne.markdowngenerator.text.TextBuilder {
+    fun getBuilder(): TextBuilder {
         return this
     }
 
-    override fun createMarkdownElement(): org.kyrinne.markdowngenerator.text.Text {
-        return org.kyrinne.markdowngenerator.text.Text("")
+    override fun createMarkdownElement(): Text {
+        return Text("")
     }
 
-    override fun append(value: Any): org.kyrinne.markdowngenerator.text.TextBuilder {
+    override fun append(value: Any?): TextBuilder {
         val sb = StringBuilder()
         if (markdownElement!!.getValue() != null) {
             sb.append(markdownElement!!.getValue())

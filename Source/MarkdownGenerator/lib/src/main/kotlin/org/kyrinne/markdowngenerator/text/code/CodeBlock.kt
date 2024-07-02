@@ -1,6 +1,6 @@
 package org.kyrinne.markdowngenerator.text.code
 
-import net.steppschuh.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.text.Text
 
 class CodeBlock @JvmOverloads constructor(value: Any?, language: String = "") : Text(value) {
     private var language = LANGUAGE_UNKNOWN
@@ -9,7 +9,7 @@ class CodeBlock @JvmOverloads constructor(value: Any?, language: String = "") : 
         this.language = language
     }
 
-    override fun getPredecessor(): String {
+    fun getPredecessor(): String {
         return "```" + language + System.lineSeparator()
     }
 

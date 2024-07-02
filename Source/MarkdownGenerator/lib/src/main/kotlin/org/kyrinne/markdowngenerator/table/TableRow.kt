@@ -1,8 +1,8 @@
 package org.kyrinne.markdowngenerator.table
 
-import net.steppschuh.markdowngenerator.MarkdownElement
-import net.steppschuh.markdowngenerator.MarkdownSerializationException
-import net.steppschuh.markdowngenerator.util.StringUtil
+import org.kyrinne.markdowngenerator.MarkdownElement
+import org.kyrinne.markdowngenerator.MarkdownSerializationException
+import org.kyrinne.markdowngenerator.util.StringUtil
 
 class TableRow<T : Any?> : MarkdownElement {
     private var columns: MutableList<T>

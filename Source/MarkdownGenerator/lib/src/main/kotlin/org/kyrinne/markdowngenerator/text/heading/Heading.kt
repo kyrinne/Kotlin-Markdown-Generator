@@ -1,7 +1,7 @@
 package org.kyrinne.markdowngenerator.text.heading
 
-import net.steppschuh.markdowngenerator.text.Text
-import net.steppschuh.markdowngenerator.util.StringUtil
+import org.kyrinne.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.util.StringUtil
 import kotlin.math.max
 import kotlin.math.min
 

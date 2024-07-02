@@ -1,6 +1,5 @@
 package org.kyrinne.markdowngenerator
 
-import net.steppschuh.markdowngenerator.table.TableRow
 import org.kyrinne.markdowngenerator.table.TableRow
 import java.util.*
 

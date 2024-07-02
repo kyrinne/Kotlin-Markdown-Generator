@@ -4,7 +4,7 @@ package org.kyrinne.markdowngenerator
  * Base class that every markdown element extends.
  */
 abstract class MarkdownElement : MarkdownSerializable {
-    private var serialized: String? = null
+    var serialized: String? = null
 
     /**
      * Attempts to generate a String representing this markdown element.

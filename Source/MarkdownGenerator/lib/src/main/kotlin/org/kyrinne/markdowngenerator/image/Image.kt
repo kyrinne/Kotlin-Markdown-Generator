@@ -1,10 +1,9 @@
 package org.kyrinne.markdowngenerator.image
 
-import net.steppschuh.markdowngenerator.MarkdownSerializationException
-import net.steppschuh.markdowngenerator.link.Link
+import org.kyrinne.markdowngenerator.MarkdownSerializationException
+import org.kyrinne.markdowngenerator.link.Link
 
-class Image(text: Any?, url: String?) : Link(text, url) {
-    constructor(url: String?) : this(url, url)
+class Image(text: Any, url: String) : Link(text, url) {
 
     @Throws(MarkdownSerializationException::class)
     override fun serialize(): String {

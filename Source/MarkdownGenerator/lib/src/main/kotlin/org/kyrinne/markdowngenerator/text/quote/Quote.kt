@@ -1,7 +1,7 @@
 package org.kyrinne.markdowngenerator.text.quote
 
-import net.steppschuh.markdowngenerator.MarkdownSerializationException
-import net.steppschuh.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.MarkdownSerializationException
+import org.kyrinne.markdowngenerator.text.Text
 
 /**
  * Created by steppschuh on 15/12/2016.

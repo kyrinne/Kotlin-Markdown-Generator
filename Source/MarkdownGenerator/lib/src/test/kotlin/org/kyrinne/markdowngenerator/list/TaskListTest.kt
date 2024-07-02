@@ -9,7 +9,7 @@ class TaskListTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun example1() {
-        val items = java.util.Arrays.asList(
+        val items = listOf(
             TaskListItem("Task 1", true),
             TaskListItem("Task 2", false),
             TaskListItem("Task 3")

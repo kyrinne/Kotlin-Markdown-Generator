@@ -1,6 +1,10 @@
 package org.kyrinne.markdowngenerator.table
 
 import org.junit.jupiter.api.Test
+import org.kyrinne.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.text.code.Code
+import org.kyrinne.markdowngenerator.text.emphasis.BoldText
+import java.util.*
 
 /**
  * Created by steppschuh on 15/12/2016.
@@ -9,23 +13,23 @@ class TableTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun example1() {
-        val rows = java.util.Arrays.asList<TableRow<*>>(
-            TableRow<Any?>(
-                mutableListOf<String?>(
+        val rows = mutableListOf<TableRow<*>>(
+            TableRow(
+                mutableListOf(
                     "Left",
                     "Center",
                     "Right"
                 )
             ),
-            TableRow<Any?>(
-                java.util.Arrays.asList<org.kyrinne.markdowngenerator.text.Text?>(
-                    org.kyrinne.markdowngenerator.text.Text("Normal Text"),
+            TableRow(
+                mutableListOf(
+                    Text("Normal Text"),
                     BoldText("Bold Text"),
-                    org.kyrinne.markdowngenerator.text.code.Code("Code Text")
+                    Code("Code Text")
                 )
             ),
-            TableRow<Any?>(
-                mutableListOf<Int?>(
+            TableRow(
+                mutableListOf(
                     1,
                     2,
                     3
@@ -33,7 +37,7 @@ class TableTest {
             )
         )
 
-        val alignments = java.util.Arrays.asList(
+        val alignments = listOf(
             Table.ALIGN_LEFT,
             Table.ALIGN_CENTER,
             Table.ALIGN_RIGHT

@@ -1,20 +1,20 @@
 package org.kyrinne.markdowngenerator
 
-import net.steppschuh.markdowngenerator.image.Image
-import net.steppschuh.markdowngenerator.link.Link
-import net.steppschuh.markdowngenerator.list.TaskList
-import net.steppschuh.markdowngenerator.list.TaskListItem
-import net.steppschuh.markdowngenerator.list.UnorderedList
-import net.steppschuh.markdowngenerator.progress.ProgressBar
-import net.steppschuh.markdowngenerator.rule.HorizontalRule
-import net.steppschuh.markdowngenerator.text.Text
-import net.steppschuh.markdowngenerator.text.code.Code
-import net.steppschuh.markdowngenerator.text.code.CodeBlock
-import net.steppschuh.markdowngenerator.text.emphasis.BoldText
-import net.steppschuh.markdowngenerator.text.emphasis.ItalicText
-import net.steppschuh.markdowngenerator.text.emphasis.StrikeThroughText
-import net.steppschuh.markdowngenerator.text.heading.Heading
-import net.steppschuh.markdowngenerator.text.quote.Quote
+import org.kyrinne.markdowngenerator.image.Image
+import org.kyrinne.markdowngenerator.link.Link
+import org.kyrinne.markdowngenerator.list.TaskList
+import org.kyrinne.markdowngenerator.list.TaskListItem
+import org.kyrinne.markdowngenerator.list.UnorderedList
+import org.kyrinne.markdowngenerator.progress.ProgressBar
+import org.kyrinne.markdowngenerator.rule.HorizontalRule
+import org.kyrinne.markdowngenerator.text.Text
+import org.kyrinne.markdowngenerator.text.code.Code
+import org.kyrinne.markdowngenerator.text.code.CodeBlock
+import org.kyrinne.markdowngenerator.text.emphasis.BoldText
+import org.kyrinne.markdowngenerator.text.emphasis.ItalicText
+import org.kyrinne.markdowngenerator.text.emphasis.StrikeThroughText
+import org.kyrinne.markdowngenerator.text.heading.Heading
+import org.kyrinne.markdowngenerator.text.quote.Quote
 import java.util.*
 
 /**

@@ -1,7 +1,7 @@
 package org.kyrinne.markdowngenerator.text.code
 
-import net.steppschuh.markdowngenerator.text.Text
 import org.junit.jupiter.api.Test
+import org.kyrinne.markdowngenerator.text.Text
 
 /**
  * Created by steppschuh on 15/12/2016.

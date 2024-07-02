@@ -1,6 +1,7 @@
 package org.kyrinne.markdowngenerator.progress
 
 import org.junit.jupiter.api.Test
+import kotlin.math.pow
 
 /**
  * Created by Stephan on 12/18/2016.
@@ -46,7 +47,7 @@ class ProgressBarTest {
         progressBar.setClosingChar(' ')
 
         for (i in 0..20) {
-            progressBar.setValue(0.1 * (kotlin.math.sin(i.toDouble()) + i.pow(1.3) - (1.3 * i.pow(1.2))) + 0.3)
+            progressBar.setValue(0.1 * (kotlin.math.sin(i.toDouble()) + i.toDouble().pow(1.3) - (1.3 * i.toDouble().pow(1.2))) + 0.3)
             val percentage = Math.round(progressBar.getValue() * 100).toString() + "%"
             val visualization = progressBar.toString().replace(progressBar.getEmptyChar().toString() + "", "")
             tableBuilder.addRow((i + 1), percentage, visualization)
