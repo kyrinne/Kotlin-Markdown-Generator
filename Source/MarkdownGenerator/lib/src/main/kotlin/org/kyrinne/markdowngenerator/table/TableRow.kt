@@ -5,7 +5,7 @@ import org.kyrinne.markdowngenerator.MarkdownSerializationException
 import org.kyrinne.markdowngenerator.util.StringUtil
 
 class TableRow<T : Any?> : MarkdownElement {
-    private var columns: MutableList<T>
+    @JvmField var columns: MutableList<T>
 
     constructor() {
         this.columns = ArrayList()

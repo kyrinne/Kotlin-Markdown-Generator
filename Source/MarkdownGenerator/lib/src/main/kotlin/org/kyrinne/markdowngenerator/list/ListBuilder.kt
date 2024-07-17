@@ -6,23 +6,23 @@ import org.kyrinne.markdowngenerator.MarkdownSerializable
 /**
  * Created by steppschuh on 23/12/2016.
  */
-class ListBuilder(override val builder: ListBuilder) : MarkdownBuilder<ListBuilder, UnorderedList<*>>() {
+// TODO: think about the types - perhaps lists of text items are enough?
+class ListBuilder(override val builder: ListBuilder?) : MarkdownBuilder<ListBuilder?, UnorderedList<Any?>>() {
 
-    fun getBuilder(): ListBuilder {
-        return this
-    }
+//    fun getBuilder(): ListBuilder {
+//        return this
+//    }
 
-    override fun createMarkdownElement(): UnorderedList<*> {
-        return UnorderedList<Any?>()
+    override fun createMarkdownElement(): UnorderedList<Any?> {
+        return UnorderedList()
     }
 
     override fun append(value: Any?): ListBuilder {
         markdownElement.getItems().add(value)
         return this
-
     }
 
-    override fun append(value: MarkdownSerializable): ListBuilder {
+    override fun append(value: MarkdownSerializable): ListBuilder? {
         if (value is ListBuilder) {
             val unorderedList = value.markdownElement
             unorderedList.incrementIndentationLevel()

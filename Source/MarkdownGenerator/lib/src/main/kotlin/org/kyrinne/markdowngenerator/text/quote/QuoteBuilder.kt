@@ -1,24 +1,23 @@
 package org.kyrinne.markdowngenerator.text.quote
 
-import net.steppschuh.markdowngenerator.MarkdownBuilder
+import org.kyrinne.markdowngenerator.MarkdownBuilder
+
 
 /**
  * Created by Stephan on 12/25/2016.
  */
-class QuoteBuilder : MarkdownBuilder<QuoteBuilder?, Quote?> {
-    constructor() : super()
+class QuoteBuilder(override val builder: QuoteBuilder?) : MarkdownBuilder<QuoteBuilder?, Quote>() {
 
-    constructor(parentBuilder: MarkdownBuilder<*, *>?) : super(parentBuilder)
-
-    override fun getBuilder(): QuoteBuilder {
-        return this
-    }
+//    fun getBuilder(): QuoteBuilder {
+//        return this
+//    }
 
     override fun createMarkdownElement(): Quote {
         return Quote("")
     }
 
-    override fun append(value: Any): QuoteBuilder {
+    override fun append(value: Any?): QuoteBuilder {
+        // TODO: fix nullability nonsense
         markdownElement!!.value = StringBuilder()
             .append(markdownElement!!.value)
             .append(value)

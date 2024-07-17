@@ -5,16 +5,20 @@ import org.kyrinne.markdowngenerator.MarkdownElement
 import org.kyrinne.markdowngenerator.MarkdownSerializationException
 
 open class Text(
-    protected var value: Any?,
-    override val predecessor: String = "",
-    override val successor: String = "",
-) : MarkdownElement(), MarkdownCascadable {
+    @JvmField var value: Any?, // TODO: limit types to a sensible range? // TODO: remove nullability
+    @JvmField val predecessor: String = "",
+    @JvmField val successor: String = "",
+) : MarkdownElement() {
     @Throws(MarkdownSerializationException::class)
     override fun serialize(): String {
         if (value == null) {
-            throw MarkdownSerializationException("Value is null")
+            throw MarkdownSerializationException("Value is null") // TODO fix this
         }
         return predecessor + value.toString() + successor
+    }
+
+    open fun getPredecessor(): String {
+        return ""
     }
 
     open fun getSuccessor(): String {

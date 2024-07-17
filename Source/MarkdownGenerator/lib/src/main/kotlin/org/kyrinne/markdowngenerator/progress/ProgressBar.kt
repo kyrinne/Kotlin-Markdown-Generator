@@ -49,12 +49,12 @@ class ProgressBar : MarkdownElement {
         }
         sb.append(closingChar)
         if (isAppendingValue) {
-            var readableValue: String? = getReadableValue(value)
+            var readableValue: String = getReadableValue(value)
             readableValue = StringUtil.fillUpRightAligned(readableValue, " ", 7)
             sb.append(" ").append(readableValue)
         }
         if (isAppendingPercentage) {
-            var readablePercentage: String? = getReadablePercentage(value, minimumValue, maximumValue)
+            var readablePercentage: String = getReadablePercentage(value, minimumValue, maximumValue)
             readablePercentage = StringUtil.fillUpRightAligned(readablePercentage, " ", 4)
             sb.append(" (").append(readablePercentage).append(")")
         }

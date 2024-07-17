@@ -5,7 +5,7 @@ class TaskList : UnorderedList<TaskListItem?> {
         this.items = ArrayList()
     }
 
-    constructor(items: List<TaskListItem?>?) {
-        this.items = items
+    constructor(items: List<TaskListItem?>) {
+        this.items = items.toMutableList()
     }
 }

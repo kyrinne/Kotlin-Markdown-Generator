@@ -24,7 +24,7 @@ import java.util.*
  * Base class that every markdown builder extends. Basically capable of
  * appending stuff to a root [MarkdownElement].
  */
-abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>() : MarkdownSerializable {
+abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>() : MarkdownSerializable {
     /**
      * The root element that content will be appended too.
      */
@@ -35,7 +35,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * if they have been created using the [MarkdownBuilder.begin] method.
      * If set, this will be returned in the [MarkdownBuilder.end] method.
      */
-    var parentBuilder: MarkdownBuilder<*, *>? = null
+    private var parentBuilder: MarkdownBuilder<*, *>? = null
 
     init {
         markdownElement = createMarkdownElement()
@@ -44,7 +44,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
     protected constructor(parentBuilder: MarkdownBuilder<*, *>?) : this() {
         this.parentBuilder = parentBuilder
     }
-
+    // TODO: what's this supposed to be exactly?
     protected abstract val builder: T
 
     /**
@@ -219,7 +219,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @return the builder instance
      * @see Image.Image
      */
-    fun image(text: String?, url: String?): T {
+    fun image(text: String, url: String): T {
         return append(Image(text, url))
     }
 
@@ -230,7 +230,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @return the builder instance
      * @see Image.Image
      */
-    fun image(url: String?): T {
+    fun image(url: String): T {
         return append(Image(url))
     }
 
@@ -268,7 +268,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      */
     fun beginQuote(): QuoteBuilder {
         newParagraphIfRequired()
-        return QuoteBuilder(this)
+        return QuoteBuilder(null) // TODO: used to be this rather than null
     }
 
     /**
@@ -292,9 +292,9 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @return a new child builder instance
      * @see CodeBlockBuilder.CodeBlockBuilder
      */
-    fun beginCodeBlock(language: String?): CodeBlockBuilder {
+    fun beginCodeBlock(language: String): CodeBlockBuilder {
         newParagraphIfRequired()
-        return CodeBlockBuilder(this, language!!)
+        return CodeBlockBuilder(null, language) // TODO: used to be this rather than null
     }
 
     /**
@@ -327,7 +327,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @see ListBuilder.ListBuilder
      */
     fun beginList(): ListBuilder {
-        return ListBuilder(this)
+        return ListBuilder(null)
     }
 
     /**
@@ -337,7 +337,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @return the builder instance
      * @see UnorderedList.UnorderedList
      */
-    fun unorderedList(vararg items: Any?): T {
+    fun unorderedList(vararg items: Any): T {
         newLinesIfRequired(1)
         append(UnorderedList(mutableListOf(*items)))
         return newParagraph()
@@ -363,6 +363,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>, S : MarkdownElement>()
      * @param value value to be appended
      * @return the builder instance
      */
+    // TODO: is this a good idea?
     abstract fun append(value: Any?): T
 
     /**

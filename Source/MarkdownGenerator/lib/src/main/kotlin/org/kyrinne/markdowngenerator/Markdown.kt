@@ -60,20 +60,20 @@ object Markdown {
     }
 
     // Link
-    fun link(text: String?, url: String?): Link {
-        return Link(text!!, url!!)
+    fun link(text: String, url: String): Link {
+        return Link(text, url)
     }
 
-    fun link(url: String?): Link {
-        return Link(url!!)
+    fun link(url: String): Link {
+        return Link(url)
     }
 
     // Image
-    fun image(text: String?, url: String?): Image {
+    fun image(text: String, url: String): Image {
         return Image(text, url)
     }
 
-    fun image(url: String?): Image {
+    fun image(url: String): Image {
         return Image(url)
     }
 

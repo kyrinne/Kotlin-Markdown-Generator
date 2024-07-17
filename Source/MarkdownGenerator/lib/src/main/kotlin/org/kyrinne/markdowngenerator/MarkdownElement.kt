@@ -4,7 +4,7 @@ package org.kyrinne.markdowngenerator
  * Base class that every markdown element extends.
  */
 abstract class MarkdownElement : MarkdownSerializable {
-    var serialized: String? = null
+    @JvmField var serialized: String? = null
 
     /**
      * Attempts to generate a String representing this markdown element.
@@ -44,7 +44,7 @@ abstract class MarkdownElement : MarkdownSerializable {
         return serialized
     }
 
-    fun setSerialized(serialized: String?) {
+    private fun setSerialized(serialized: String?) {
         this.serialized = serialized
     }
 

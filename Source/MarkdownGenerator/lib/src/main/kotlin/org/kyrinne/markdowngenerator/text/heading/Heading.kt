@@ -10,7 +10,7 @@ import kotlin.math.min
  */
 class Heading : Text {
     private var level: Int
-    var underlineStyle: Boolean = true
+    @JvmField var underlineStyle: Boolean = true
 
     constructor(value: Any?) : super(value) {
         this.level = MINIMUM_LEVEL

@@ -1,6 +1,6 @@
 package org.kyrinne.markdowngenerator.util
 
-import net.steppschuh.markdowngenerator.table.Table
+import org.kyrinne.markdowngenerator.table.Table
 
 /**
  * Created by steppschuh on 15/12/2016.

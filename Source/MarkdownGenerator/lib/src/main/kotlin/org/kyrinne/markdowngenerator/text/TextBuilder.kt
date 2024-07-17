@@ -7,9 +7,9 @@ import org.kyrinne.markdowngenerator.MarkdownBuilder
  */
 class TextBuilder(override val builder: TextBuilder?) : MarkdownBuilder<TextBuilder?, Text>() {
 
-    fun getBuilder(): TextBuilder {
-        return this
-    }
+//    fun getBuilder(): TextBuilder {
+//        return this
+//    }
 
     override fun createMarkdownElement(): Text {
         return Text("")
@@ -17,11 +17,11 @@ class TextBuilder(override val builder: TextBuilder?) : MarkdownBuilder<TextBuil
 
     override fun append(value: Any?): TextBuilder {
         val sb = StringBuilder()
-        if (markdownElement!!.getValue() != null) {
-            sb.append(markdownElement!!.getValue())
+        if (markdownElement.getValue() != null) {
+            sb.append(markdownElement.getValue())
         }
         sb.append(value)
-        markdownElement!!.setValue(sb)
+        markdownElement.setValue(sb)
         return this
     }
 }

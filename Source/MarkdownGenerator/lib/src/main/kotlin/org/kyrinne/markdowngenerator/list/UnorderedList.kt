@@ -5,7 +5,7 @@ import org.kyrinne.markdowngenerator.MarkdownSerializationException
 import org.kyrinne.markdowngenerator.util.StringUtil
 
 open class UnorderedList<T : Any?> : MarkdownElement {
-    protected var items: MutableList<T>
+    @JvmField protected var items: MutableList<T>
     private var indentationLevel: Int = 0
 
     constructor() {
@@ -70,7 +70,7 @@ open class UnorderedList<T : Any?> : MarkdownElement {
     }
 
     fun incrementIndentationLevel() {
-        indentationLevel = indentationLevel + 1
+        indentationLevel += 1
         invalidateSerialized()
     }
 }

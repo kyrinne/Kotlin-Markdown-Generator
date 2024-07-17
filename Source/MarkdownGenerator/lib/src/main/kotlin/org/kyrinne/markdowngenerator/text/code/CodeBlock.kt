@@ -3,13 +3,13 @@ package org.kyrinne.markdowngenerator.text.code
 import org.kyrinne.markdowngenerator.text.Text
 
 class CodeBlock @JvmOverloads constructor(value: Any?, language: String = "") : Text(value) {
-    private var language = LANGUAGE_UNKNOWN
+    @JvmField var language = LANGUAGE_UNKNOWN
 
     init {
         this.language = language
     }
 
-    fun getPredecessor(): String {
+    override fun getPredecessor(): String {
         return "```" + language + System.lineSeparator()
     }
 
