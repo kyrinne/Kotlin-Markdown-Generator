@@ -24,7 +24,10 @@ class HorizontalRuleTest {
 
     // TODO: add reasonable constraints to HorizontalRule and add them here
     @Property
-    fun `custom horizontal rules are formatted as expected`(@ForAll @IntRange(min = -1, max = 1000) length: Int, @ForAll character: Character) {
+    fun `custom horizontal rules are formatted as expected`(
+        @ForAll @IntRange(min = -1, max = 1000) length: Int,
+        @ForAll character: Character
+    ) {
         val expectedLength = max(length, HorizontalRule.MINIMUM_LENGTH)
         assertEquals(
             expected = character.value.toString().repeat(expectedLength),
