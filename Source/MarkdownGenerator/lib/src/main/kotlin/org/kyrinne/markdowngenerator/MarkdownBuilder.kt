@@ -75,11 +75,12 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      * @return the parent builder
      */
     fun end(): MarkdownBuilder<*, *> {
-        if (parentBuilder == null) {
-            return this
+        return if (parentBuilder == null) {
+            this
+        } else {
+            parentBuilder!!.append(this)
+            return parentBuilder as MarkdownBuilder<*, *>
         }
-        parentBuilder!!.append(this)
-        return parentBuilder as MarkdownBuilder<*, *>
     }
 
     // Emphasis
@@ -268,7 +269,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      */
     fun beginQuote(): QuoteBuilder {
         newParagraphIfRequired()
-        return QuoteBuilder(null) // TODO: used to be this rather than null
+        return QuoteBuilder()
     }
 
     /**
@@ -294,7 +295,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      */
     fun beginCodeBlock(language: String): CodeBlockBuilder {
         newParagraphIfRequired()
-        return CodeBlockBuilder(null, language) // TODO: used to be this rather than null
+        return CodeBlockBuilder()
     }
 
     /**
@@ -327,7 +328,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      * @see ListBuilder.ListBuilder
      */
     fun beginList(): ListBuilder {
-        return ListBuilder(null)
+        return ListBuilder()
     }
 
     /**
@@ -420,7 +421,8 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      *
      * @return the builder instance
      */
-    fun newLines(count: Int): T {
+    private fun newLines(count: Int): T {
+        // TODO: fix loop
         for (i in 0 until count) {
             append(System.lineSeparator())
         }
@@ -434,7 +436,7 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      * @param count number of new lines to be appended
      * @return the builder instance
      */
-    protected fun newLinesIfRequired(count: Int): T {
+    private fun newLinesIfRequired(count: Int): T {
         if (!endsWithLineSeparators(1)) {
             newLines(count)
         }
@@ -448,28 +450,22 @@ abstract class MarkdownBuilder<T : MarkdownBuilder<T, S>?, S : MarkdownElement>(
      * @param count number of new lines
      * @return true if it ends with the specified number of new lines
      */
-    protected fun endsWithLineSeparators(count: Int): Boolean {
-        var separators: String? = ""
+    private fun endsWithLineSeparators(count: Int): Boolean {
+        var separators = ""
+        // TODO: fix loop
         for (i in 0 until count) {
             separators += System.lineSeparator()
         }
-        return markdownElement.getSerialized("").endsWith(separators!!)
+        return markdownElement.getSerialized("").endsWith(separators)
     }
 
     override fun toString(): String {
-        return build().getSerialized(this.javaClass.simpleName)
+        return markdownElement.getSerialized(fallback = this.javaClass.simpleName)
     }
 
     @Throws(MarkdownSerializationException::class)
     override fun toMarkdownElement(): MarkdownElement {
-        return build()
-    }
-
-    /**
-     * Returns the root [MarkdownBuilder.markdownElement]
-     * @return [MarkdownBuilder.markdownElement]
-     */
-    private fun build(): S {
         return markdownElement
     }
+
 }

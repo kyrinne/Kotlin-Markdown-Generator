@@ -9,10 +9,12 @@ import org.kyrinne.markdowngenerator.Markdown.task
  * Created by steppschuh on 23/12/2016.
  */
 class MarkdownBuilderTest {
+    // TODO: fix tests
+
     @Test
     @Throws(java.lang.Exception::class)
     fun example1() {
-        val builder = org.kyrinne.markdowngenerator.text.TextBuilder(null)
+        val builder = org.kyrinne.markdowngenerator.text.TextBuilder()
             .heading("Markdown Builder")
             ?.append("Demonstrating: ")
             ?.append(bold("Bold Text"))
@@ -32,7 +34,7 @@ class MarkdownBuilderTest {
             ?.append("dummyMethod(this);")
             ?.end()
             ?.newParagraph()
-            ?.append("Over.")!!
+            ?.append("Over.")
 
         println(builder.toString())
     }
@@ -40,7 +42,7 @@ class MarkdownBuilderTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun example2() {
-        val builder = org.kyrinne.markdowngenerator.list.ListBuilder(null)
+        val builder = org.kyrinne.markdowngenerator.list.ListBuilder()
             .text("Item 1")
             ?.bold("Item 2")
             ?.beginList()
@@ -53,7 +55,7 @@ class MarkdownBuilderTest {
             ?.end()
             ?.text("Item 2.3")
             ?.end()
-            ?.text("Item 3")!!
+            ?.text("Item 3")
 
         println(builder.toString())
     }
@@ -61,13 +63,15 @@ class MarkdownBuilderTest {
     @Test
     @Throws(java.lang.Exception::class)
     fun example3() {
-        val builder = org.kyrinne.markdowngenerator.text.TextBuilder(null)
-            .heading("Markdown Builder")
-            ?.text("Demonstrating: ")!!.bold("Bold Text")
+        val builder = org.kyrinne.markdowngenerator.text.TextBuilder()
+         .heading("Markdown Builder")
+            ?.text("Demonstrating: ")
+            ?.bold("Bold Text")
             ?.newParagraph()
             ?.quote("I should be a quote\nI should still be a quote")
             ?.beginQuote()
-            ?.text("I should be a quote")!!.newLine()
+            ?.text("I should be a quote")
+            ?.newLine()
             ?.text("I should still be a quote")
             ?.end()
             ?.newParagraph()
@@ -90,7 +94,7 @@ class MarkdownBuilderTest {
                 task("Task 1", true),
                 task("Task 2", false),
                 task("Task 3")
-            )!!
+            )
 
         println(builder.toString())
     }
